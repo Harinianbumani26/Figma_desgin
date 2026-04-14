@@ -1,0 +1,733 @@
+/* always start with a reset so browsers don't add their own spacing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #1e1e24;
+  color: #fff;
+  font-size: 15px;
+}
+
+/* strip underlines from all anchor tags */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* base styles shared by all buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+/* the purple "Log in" button in the nav */
+.btn-primary {
+  background: #a78bfa;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #c4b5fd;
+}
+
+/* the yellow "Get started" button used in hero and cta */
+.btn-accent {
+  background: #e8c96a;
+  color: #1a1a1a;
+}
+
+.btn-accent:hover {
+  background: #d4a843;
+}
+
+/* nav stays at the top when you scroll */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: #1e1e24;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header .logo {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+header nav a {
+  font-size: 14px;
+  color: #9ca3af;
+  transition: color 0.2s;
+}
+
+header nav a:hover {
+  color: #fff;
+}
+
+/* hero splits into two halves - text on left, cards on right */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px;
+  gap: 40px;
+}
+
+.hero-text {
+  max-width: 400px;
+}
+
+.hero h1 {
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 14px;
+  color: #9ca3af;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* 2 columns, the third card spans both */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  max-width: 420px;
+  width: 100%;
+}
+
+.card {
+  background: #16161c;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 16px;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* spans across both grid columns */
+.card-wide {
+  grid-column: span 2;
+  min-height: 110px;
+}
+
+.card-label {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* donut chart - made with conic-gradient, no library needed */
+.donut {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: conic-gradient(#6366f1 0% 40%, #f59e0b 40% 65%, #10b981 65% 100%);
+  align-self: center;
+}
+
+/* slightly bigger version used inside the dashboard */
+.donut-big {
+  width: 80px;
+  height: 80px;
+  align-self: center;
+}
+
+/* wave chart - the line is drawn using an inline SVG as a background image */
+.wave {
+  flex: 1;
+  background: #2a2a32;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 50px;
+}
+
+.wave-big {
+  min-height: 80px;
+}
+
+.wave::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50'%3E%3Cpolyline points='0,40 30,20 60,35 90,10 120,30 150,15 180,25 200,20' fill='none' stroke='%23e8c96a' stroke-width='2'/%3E%3C/svg%3E") no-repeat center / cover;
+}
+
+/* area chart - same trick, SVG as background with a filled polygon */
+.area {
+  flex: 1;
+  background: #2a2a32;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 70px;
+}
+
+.area::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60'%3E%3Cpolygon points='0,60 0,45 40,30 80,40 120,20 160,35 200,15 240,28 300,20 300,60' fill='%23e8c96a' opacity='0.3'/%3E%3Cpolyline points='0,45 40,30 80,40 120,20 160,35 200,15 240,28 300,20' fill='none' stroke='%23e8c96a' stroke-width='2'/%3E%3C/svg%3E") no-repeat center / cover;
+}
+
+/* brand logos row between hero and dashboard */
+.brands {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 28px 80px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.brand {
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.brand:hover {
+  color: #9ca3af;
+}
+
+/* accenture brand uses italic */
+.brand-accenture {
+  font-style: italic;
+  font-size: 18px;
+}
+
+.brand-apple {
+  font-size: 22px;
+}
+
+/* microsoft uses the system font Segoe UI - no need to load it */
+.brand-microsoft {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 400;
+}
+
+/* google uses Roboto which we loaded from Google Fonts */
+.brand-google {
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+/* BearingPoint looks best in a serif font */
+.brand-bearing {
+  font-family: 'Playfair Display', serif;
+}
+
+.dashboard {
+  padding: 60px 80px;
+}
+
+/* the cream/beige box that wraps the dark dashboard */
+.dashboard-wrap {
+  background: #f5f0e8;
+  border-radius: 22px;
+  padding: 28px;
+}
+
+/* the actual dark app UI inside */
+.dashboard-box {
+  display: flex;
+  background: #16161c;
+  border-radius: 14px;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 160px;
+  padding: 24px 16px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-left: 4px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: #9ca3af;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar a:hover {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+}
+
+/* red left border highlights the current page */
+.sidebar a.active {
+  color: #fff;
+  border-left: 3px solid #f87171;
+  padding-left: 7px;
+}
+
+.content {
+  flex: 1;
+  padding: 24px 28px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search {
+  background: #2a2a32;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: #9ca3af;
+  width: 200px;
+  outline: none;
+}
+
+/* small circle representing the logged-in user */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a78bfa, #6366f1);
+}
+
+.greeting {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.sub {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 20px;
+}
+
+.stats {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  flex: 1;
+  background: #2a2a32;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s;
+}
+
+/* purple border glow on hover */
+.stat:hover {
+  border-color: #a78bfa;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.stat-value.green {
+  color: #4ade80;
+  font-size: 14px;
+}
+
+.stat-value.red {
+  color: #f87171;
+  font-size: 14px;
+}
+
+.charts {
+  display: flex;
+  gap: 14px;
+}
+
+.chart-box {
+  flex: 1;
+  background: #2a2a32;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 140px;
+}
+
+.chart-label {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* three feature boxes evenly spaced */
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 80px;
+  text-align: center;
+}
+
+.feature {
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.2s;
+}
+
+.feature:hover {
+  transform: translateY(-6px);
+}
+
+.feature h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.feature p {
+  font-size: 13px;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+/* rounded square icon above each feature */
+.feature-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon.blue   { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+.feature-icon.purple { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+.feature-icon.yellow { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+
+.testimonial {
+  padding: 0 80px 70px;
+}
+
+/* the purple review card */
+.review {
+  background: #b8a9f0;
+  border-radius: 22px;
+  padding: 44px 48px;
+  color: #1a1a2e;
+  transition: box-shadow 0.2s;
+}
+
+.review:hover {
+  box-shadow: 0 12px 40px rgba(167,139,250,0.3);
+}
+
+.review p {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.65;
+  margin-bottom: 28px;
+}
+
+.reviewer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* placeholder circle for the reviewer's photo */
+.reviewer-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a78bfa, #6366f1);
+  border: 3px solid #fff;
+}
+
+.reviewer-name {
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.stars {
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+/* cta splits into text on left and card visual on right */
+.cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 80px 80px;
+  gap: 60px;
+}
+
+.cta-text {
+  max-width: 380px;
+}
+
+.cta-text h2 {
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+/* "Let's talk" is bold, "Questions?" is not */
+.cta-text h2 strong {
+  font-weight: 800;
+}
+
+.cta-text p {
+  font-size: 13px;
+  color: #9ca3af;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.cta-card {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* mint green box that holds the card */
+.wallet-outer {
+  background: #c8ede8;
+  border-radius: 22px;
+  padding: 30px;
+  width: 320px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* dark card sitting inside the green box */
+.wallet-inner {
+  background: #16161c;
+  border-radius: 14px;
+  width: 220px;
+  height: 180px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.wallet-chip {
+  background: #2a2a32;
+  border-radius: 10px;
+  padding: 12px 14px;
+  position: relative;
+}
+
+/* two circles on the left side of the card */
+.chip-icons {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.chip-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.chip-circle.red  { background: #ef4444; }
+.chip-circle.gray { background: #9ca3af; }
+
+/* two dots in the top right corner of the card */
+.chip-dots {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.chip-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.chip-dot.purple { background: #a78bfa; }
+.chip-dot.blue   { background: #60a5fa; }
+
+.chip-label {
+  display: block;
+  font-size: 11px;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+.chip-name {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* footer has a slightly darker background than the page */
+footer {
+  background: #16161c;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 36px 80px 24px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 20px;
+}
+
+.footer-logo {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.newsletter p {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 10px;
+}
+
+.newsletter-form input {
+  background: #2a2a32;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #fff;
+  width: 220px;
+  outline: none;
+}
+
+.newsletter-form input::placeholder {
+  color: #9ca3af;
+}
+
+/* purple send button next to the email input */
+.newsletter-form button {
+  background: #a78bfa;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.newsletter-form button:hover {
+  background: #c4b5fd;
+}
+
+/* the little round ? button in the corner */
+.help {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #2a2a32;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.help:hover {
+  background: #a78bfa;
+}
+
+/* bottom row with copyright and policy links */
+.bottom {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 12px;
+  color: #9ca3af;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 20px;
+}
+
+.bottom a {
+  transition: color 0.2s;
+}
+
+.bottom a:hover {
+  color: #fff;
+}
